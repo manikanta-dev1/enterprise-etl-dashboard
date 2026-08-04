@@ -6,5 +6,6 @@ dist/
 Thumbs.db
 .env
 .env.*
+!.env.example
 .vscode/
 node_modules

@@ -1,12 +1,13 @@
 import { Chip } from '@mui/material';
 
-type Status = 'success' | 'running' | 'failed' | 'queued';
+type Status = 'success' | 'running' | 'failed' | 'queued' | 'inactive';
 
 const statusColorMap: Record<Status, 'success' | 'warning' | 'error' | 'default'> = {
   success: 'success',
   running: 'warning',
   failed: 'error',
   queued: 'default',
+  inactive: 'default',
 };
 
 type StatusBadgeProps = {

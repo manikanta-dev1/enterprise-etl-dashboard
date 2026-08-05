@@ -15,7 +15,24 @@ type StatusBadgeProps = {
 };
 
 const StatusBadge = ({ status }: StatusBadgeProps) => {
-  return <Chip label={status.toUpperCase()} color={statusColorMap[status]} size="small" />;
+  const dotColors: Record<Status, string> = {
+    success: '#2E7D32',
+    running: '#ED6C02',
+    failed: '#D32F2F',
+    queued: '#64748B',
+    inactive: '#94A3B8',
+  };
+
+  return (
+    <Chip
+      label={status.toUpperCase()}
+      color={statusColorMap[status]}
+      size="small"
+      variant={status === 'queued' || status === 'inactive' ? 'outlined' : 'filled'}
+      icon={<span style={{ width: 7, height: 7, borderRadius: '50%', background: dotColors[status] }} />}
+      sx={{ fontWeight: 700, fontSize: '0.68rem', letterSpacing: '0.04em', '& .MuiChip-icon': { ml: 1 } }}
+    />
+  );
 };
 
 export default StatusBadge;

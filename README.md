@@ -9,8 +9,9 @@ The dashboard reads backend data from these endpoints:
 - `GET /api/pipelines`
 - `GET /api/jobs`
 - `GET /api/metrics`
+- `GET /api/logs`
 
-During local development, Vite proxies `/api` to `http://localhost:8000`. Copy `.env.example` to `.env` to change the FastAPI target or the browser-facing API URL. List endpoints can return a direct array or an object containing `items`, `pipelines`/`jobs`, or `data`. Both FastAPI-style snake_case and camelCase fields are supported.
+During local development, Vite proxies `/api` to `http://localhost:8000`. Copy `.env.example` to `.env` to change the FastAPI target or the browser-facing API URL. List endpoints can return a direct array or an object containing `items`, resource-specific keys, or `data`. Both FastAPI-style snake_case and camelCase fields are supported.
 
 ## Run locally
 

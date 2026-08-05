@@ -1,27 +1,32 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import AppLayout from '../components/Layout/AppLayout';
-import Dashboard from '../pages/Dashboard';
-import Jobs from '../pages/Jobs';
-import Logs from '../pages/Logs';
-import Metrics from '../pages/Metrics';
-import Pipelines from '../pages/Pipelines';
-import Reports from '../pages/Reports';
-import Settings from '../pages/Settings';
+import Loader from '../components/Loader/Loader';
+
+const Dashboard = lazy(() => import('../pages/Dashboard'));
+const Jobs = lazy(() => import('../pages/Jobs'));
+const Logs = lazy(() => import('../pages/Logs'));
+const Metrics = lazy(() => import('../pages/Metrics'));
+const Pipelines = lazy(() => import('../pages/Pipelines'));
+const Reports = lazy(() => import('../pages/Reports'));
+const Settings = lazy(() => import('../pages/Settings'));
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route element={<AppLayout />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/pipelines" element={<Pipelines />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/logs" element={<Logs />} />
-        <Route path="/metrics" element={<Metrics />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/settings" element={<Settings />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <Suspense fallback={<Loader />}>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/pipelines" element={<Pipelines />} />
+          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/logs" element={<Logs />} />
+          <Route path="/metrics" element={<Metrics />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 };
 

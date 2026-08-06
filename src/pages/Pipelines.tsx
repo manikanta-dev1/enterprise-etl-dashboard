@@ -2,6 +2,7 @@ import { Alert, Box, Card, CardContent, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Loader from '../components/Loader/Loader';
 import PipelineCard from '../components/PipelineCard/PipelineCard';
+import { demoPipelines } from '../data/demoData';
 import { getApiErrorMessage } from '../services/api';
 import { getPipelines, Pipeline } from '../services/pipelineService';
 
@@ -12,7 +13,7 @@ const Pipelines = () => {
 	useEffect(() => {
 		const controller = new AbortController();
 		getPipelines(controller.signal).then(setPipelines).catch((requestError: unknown) => {
-			if (!controller.signal.aborted) setError(getApiErrorMessage(requestError));
+			if (!controller.signal.aborted) { setPipelines(demoPipelines); setError(`${getApiErrorMessage(requestError)} Showing sample data.`); }
 		});
 		return () => controller.abort();
 	}, []);

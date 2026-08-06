@@ -3,6 +3,7 @@ import { Alert, Box, Button, Stack, Typography } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import Loader from '../components/Loader/Loader';
 import LogsViewer from '../components/LogsViewer/LogsViewer';
+import { demoLogs } from '../data/demoData';
 import { getApiErrorMessage } from '../services/api';
 import { getLogs, LogEntry } from '../services/logService';
 
@@ -15,7 +16,7 @@ const Logs = () => {
 		setRefreshing(true);
 		setError('');
 		return getLogs(signal).then(setLogs).catch((requestError: unknown) => {
-			if (!signal?.aborted) setError(getApiErrorMessage(requestError));
+			if (!signal?.aborted) { setLogs(demoLogs); setError(`${getApiErrorMessage(requestError)} Showing sample data.`); }
 		}).finally(() => { if (!signal?.aborted) setRefreshing(false); });
 	}, []);
 

@@ -10,7 +10,7 @@ interface JobTableProps {
 }
 
 const JobTable = ({ jobs, compact = false }: JobTableProps) => (
-	<TableContainer component={Paper} variant="outlined">
+	<TableContainer component={Paper} variant="outlined" sx={{ borderRadius: 3 }}>
 		<Table size={compact ? 'small' : 'medium'}>
 			<TableHead>
 				<TableRow>
@@ -19,9 +19,9 @@ const JobTable = ({ jobs, compact = false }: JobTableProps) => (
 			</TableHead>
 			<TableBody>
 				{jobs.map((job) => (
-					<TableRow key={job.id} hover>
-						<TableCell><Typography variant="body2" fontFamily="monospace" fontWeight={600}>#{job.id}</Typography></TableCell>
-						<TableCell><Typography variant="body2" fontWeight={600}>{job.pipelineName}</Typography></TableCell>
+					<TableRow key={job.id} hover sx={{ '&:last-child td': { borderBottom: 0 } }}>
+						<TableCell><Typography variant="body2" fontFamily="monospace" color="text.secondary" fontWeight={600}>#{job.id}</Typography></TableCell>
+						<TableCell><Typography variant="body2" fontWeight={700}>{job.pipelineName}</Typography></TableCell>
 						<TableCell><StatusBadge status={job.status} /></TableCell>
 						<TableCell>{formatDateTime(job.startedAt)}</TableCell>
 						<TableCell>{formatDuration(job.durationSeconds)}</TableCell>

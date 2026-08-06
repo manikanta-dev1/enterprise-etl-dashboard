@@ -1,4 +1,4 @@
-import { Box, Container, Toolbar } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
@@ -11,8 +11,7 @@ const AppLayout = () => {
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
       <Navbar onMenuClick={() => setSidebarOpen(true)} />
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <Toolbar />
-      <Container maxWidth="xl" sx={{ py: 3 }}>
+      <Container maxWidth={false} sx={{ pt: { xs: 10, md: 4 }, pb: 5, pl: { md: '280px !important' }, pr: { md: '32px !important' }, maxWidth: 1600 }}>
         <Outlet />
       </Container>
     </Box>

@@ -1,13 +1,13 @@
-import { Chip } from '@mui/material';
+import { Box } from '@mui/material';
 
 type Status = 'success' | 'running' | 'failed' | 'queued' | 'inactive';
 
-const statusColorMap: Record<Status, 'success' | 'warning' | 'error' | 'default'> = {
-  success: 'success',
-  running: 'warning',
-  failed: 'error',
-  queued: 'default',
-  inactive: 'default',
+const styles: Record<Status, { color: string; background: string }> = {
+  success: { color: '#15803D', background: '#ECFDF3' },
+  running: { color: '#4F46E5', background: '#EEF2FF' },
+  failed: { color: '#DC2626', background: '#FEF2F2' },
+  queued: { color: '#A16207', background: '#FFFBEB' },
+  inactive: { color: '#667085', background: '#F2F4F7' },
 };
 
 type StatusBadgeProps = {
@@ -15,23 +15,11 @@ type StatusBadgeProps = {
 };
 
 const StatusBadge = ({ status }: StatusBadgeProps) => {
-  const dotColors: Record<Status, string> = {
-    success: '#2E7D32',
-    running: '#ED6C02',
-    failed: '#D32F2F',
-    queued: '#64748B',
-    inactive: '#94A3B8',
-  };
-
   return (
-    <Chip
-      label={status.toUpperCase()}
-      color={statusColorMap[status]}
-      size="small"
-      variant={status === 'queued' || status === 'inactive' ? 'outlined' : 'filled'}
-      icon={<span style={{ width: 7, height: 7, borderRadius: '50%', background: dotColors[status] }} />}
-      sx={{ fontWeight: 700, fontSize: '0.68rem', letterSpacing: '0.04em', '& .MuiChip-icon': { ml: 1 } }}
-    />
+    <Box component="span" sx={{ display: 'inline-flex', alignItems: 'center', gap: .75, px: 1, py: .45, borderRadius: 99, bgcolor: styles[status].background, color: styles[status].color, fontSize: 11, fontWeight: 750, lineHeight: 1.2, textTransform: 'capitalize', whiteSpace: 'nowrap' }}>
+      <Box component="span" sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: 'currentColor', boxShadow: status === 'running' ? '0 0 0 3px rgba(79,70,229,.12)' : 'none' }} />
+      {status}
+    </Box>
   );
 };
 

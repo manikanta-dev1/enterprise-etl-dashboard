@@ -20,17 +20,17 @@ const LogsViewer = ({ logs }: LogsViewerProps) => {
 	}), [level, logs, query]);
 
 	return (
-		<Paper variant="outlined" sx={{ overflow: 'hidden' }}>
+		<Paper variant="outlined" sx={{ overflow: 'hidden', borderRadius: 3 }}>
 			<Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} sx={{ p: 2, bgcolor: 'background.paper', borderBottom: 1, borderColor: 'divider' }}>
 				<TextField size="small" placeholder="Search messages, pipelines, or jobs" value={query} onChange={(event) => setQuery(event.target.value)} fullWidth InputProps={{ startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small" /></InputAdornment> }} />
 				<Select size="small" value={level} onChange={(event) => setLevel(event.target.value as 'all' | LogLevel)} sx={{ minWidth: 150 }}><MenuItem value="all">All levels</MenuItem><MenuItem value="info">Info</MenuItem><MenuItem value="warning">Warning</MenuItem><MenuItem value="error">Error</MenuItem><MenuItem value="debug">Debug</MenuItem></Select>
 			</Stack>
-			<Box sx={{ bgcolor: '#0F172A', color: '#CBD5E1', minHeight: 420, maxHeight: '65vh', overflow: 'auto', p: 2, fontFamily: 'Consolas, monospace' }}>
+			<Box sx={{ bgcolor: '#11131D', color: '#CBD5E1', minHeight: 420, maxHeight: '65vh', overflow: 'auto', p: 2, fontFamily: '"SFMono-Regular", Consolas, monospace' }}>
 				{visibleLogs.map((log) => (
 					<Box key={log.id} sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '180px 82px minmax(0, 1fr)' }, gap: { xs: 0.5, md: 1.5 }, py: 1, borderBottom: '1px solid rgba(148,163,184,0.12)' }}>
 						<Typography variant="caption" component="span" sx={{ color: '#64748B', fontFamily: 'inherit' }}>{formatDateTime(log.timestamp)}</Typography>
 						<Chip label={log.level.toUpperCase()} size="small" sx={{ width: 74, height: 21, color: levelColors[log.level], borderColor: levelColors[log.level], fontFamily: 'inherit', fontWeight: 700 }} variant="outlined" />
-						<Typography variant="body2" component="span" sx={{ color: '#E2E8F0', fontFamily: 'inherit', overflowWrap: 'anywhere' }}>{log.pipelineName && <Box component="span" sx={{ color: '#67E8F9' }}>[{log.pipelineName}] </Box>}{log.message}{log.jobId !== undefined && <Box component="span" sx={{ color: '#64748B' }}> · job #{log.jobId}</Box>}</Typography>
+						<Typography variant="body2" component="span" sx={{ color: '#E2E8F0', fontFamily: 'inherit', overflowWrap: 'anywhere' }}>{log.pipelineName && <Box component="span" sx={{ color: '#818CF8' }}>[{log.pipelineName}] </Box>}{log.message}{log.jobId !== undefined && <Box component="span" sx={{ color: '#64748B' }}> · job #{log.jobId}</Box>}</Typography>
 					</Box>
 				))}
 				{visibleLogs.length === 0 && <Typography sx={{ py: 8, textAlign: 'center', color: '#64748B', fontFamily: 'inherit' }}>No log entries match the current filters.</Typography>}

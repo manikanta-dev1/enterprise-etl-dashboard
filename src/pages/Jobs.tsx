@@ -1,6 +1,7 @@
 import { Alert, Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import JobTable from '../components/JobTable/JobTable';
+import { demoJobs } from '../data/demoData';
 import Loader from '../components/Loader/Loader';
 import { getApiErrorMessage } from '../services/api';
 import { getJobs, Job } from '../services/jobService';
@@ -12,7 +13,7 @@ const Jobs = () => {
 	useEffect(() => {
 		const controller = new AbortController();
 		getJobs(controller.signal).then(setJobs).catch((requestError: unknown) => {
-			if (!controller.signal.aborted) setError(getApiErrorMessage(requestError));
+			if (!controller.signal.aborted) { setJobs(demoJobs); setError(`${getApiErrorMessage(requestError)} Showing sample data.`); }
 		});
 		return () => controller.abort();
 	}, []);

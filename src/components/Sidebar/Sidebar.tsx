@@ -3,6 +3,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import DnsIcon from '@mui/icons-material/Dns';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import MemoryIcon from '@mui/icons-material/Memory';
+import MonitorHeartOutlinedIcon from '@mui/icons-material/MonitorHeartOutlined';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {
@@ -29,6 +30,7 @@ type SidebarProps = {
 
 const navItems = [
   { label: 'Dashboard', path: '/', icon: <DashboardIcon /> },
+  { label: 'Monitoring', path: '/monitoring', icon: <MonitorHeartOutlinedIcon /> },
   { label: 'Pipelines', path: '/pipelines', icon: <DnsIcon /> },
   { label: 'Jobs', path: '/jobs', icon: <ListAltIcon /> },
   { label: 'Logs', path: '/logs', icon: <ReceiptLongIcon /> },

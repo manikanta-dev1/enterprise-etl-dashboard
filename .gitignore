@@ -9,3 +9,7 @@ Thumbs.db
 !.env.example
 .vscode/
 node_modules
+__pycache__/
+*.py[cod]
+airflow/logs/*
+!airflow/logs/.gitkeep

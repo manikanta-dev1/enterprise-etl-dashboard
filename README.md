@@ -50,3 +50,18 @@ Run FastAPI on port 8000 before opening the dashboard, or start `backend` and
 ```bash
 npm run build
 ```
+
+## Tests
+
+Run the React component tests with:
+
+```bash
+npm test
+```
+
+Run the FastAPI integration tests against an isolated temporary database with:
+
+```bash
+python -m pip install -r backend/requirements-dev.txt
+python -m pytest backend/tests
+```

@@ -13,7 +13,11 @@ DATABASE_URL = os.getenv(
     "postgresql+psycopg://etl_user:etl_password@localhost:5432/etl_dashboard",
 )
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine_options = {"pool_pre_ping": True}
+if DATABASE_URL.startswith("sqlite"):
+    engine_options["connect_args"] = {"check_same_thread": False}
+
+engine = create_engine(DATABASE_URL, **engine_options)
 SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 
 
@@ -197,4 +201,3 @@ def metrics(db: Session = Depends(get_db)):
         "throughput_per_minute": round(sum(job.records_processed for job in completed) / max(sum(durations) / 60, 1)),
         "average_duration_seconds": round(sum(durations) / len(durations)) if durations else 0,
     }
-
